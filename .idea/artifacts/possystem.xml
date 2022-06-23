@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="possystem">
+    <output-path>$PROJECT_DIR$/out/artifacts/possystem</output-path>
+    <root id="archive" name="possystem.war">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="lk.posSystemJavaEE" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="lk.posSystemJavaEE/web/Web" />
+    </root>
+  </artifact>
+</component>
