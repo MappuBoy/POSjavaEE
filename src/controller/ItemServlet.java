@@ -50,8 +50,8 @@ public class ItemServlet extends HttpServlet {
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try{
             JsonObject itemJson = Json.createReader(req.getReader()).readObject();
-            ItemDTO item = new ItemDTO(itemJson.getString("itemid"),itemJson.getString("itemtype"),
-                    Integer.parseInt(itemJson.getString("inStock")),Double.parseDouble(itemJson.getString("itemprice")));
+            ItemDTO item = new ItemDTO(itemJson.getString("id"),itemJson.getString("brand"),
+                    Integer.parseInt(itemJson.getString("qty")),Double.parseDouble(itemJson.getString("unitprice")));
 
             if (itemDAO.update(item)) {
 
@@ -68,7 +68,7 @@ public class ItemServlet extends HttpServlet {
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try{
-            if(itemDAO.delete(req.getParameter("itemCode"))) {
+            if(itemDAO.delete(req.getParameter("id"))) {
 
             } else {
 

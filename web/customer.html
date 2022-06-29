@@ -36,6 +36,7 @@
     <div class="col">
     </div>
 
+    <form id="custForm">
     <div class="col ">
         <h4 align="center" class="align-content-center" text>Customer</h4>
         <br>
@@ -66,11 +67,127 @@
         <button type="button" class="btnDelete">Delete Customer</button>
 
     </div>
+    </form>
     <div class="col">
     </div>
 
 </div>
 <script src="assets/bootstrap-5.1.3-dist/bootstrap-5.1.3-dist/js/bootstrap.bundle.min.js"></script>
 <script src="assets/jquery-3.6.0.min.js"></script>
+<script>
+    $("#btnAdd").click(function () {
+        var data = $("#custForm").serialize(); // return query string of form with name:type-value
+        $.ajax({
+            url: "http://localhost:8080/lk.pos.SystemJavaEE/customer",
+            method: "POST",
+            data: data,// if we send data with the request
+            success: function (res) {
+                if (res.status == 200) {
+                    alert(res.message);
+                    loadAllCustomers();
+                } else {
+                    alert(res.data);
+                }
+
+            },
+            error: function (ob, textStatus, error) {
+                console.log(ob);
+                console.log(textStatus);
+                console.log(error);
+            }
+        });
+    });
+
+    //Query String
+    //http://localhost:8080/apptwo/customer?CusID=C00-001&CusName=Dasun
+    //Delete customer
+    $("#btnDelete").click(function () {
+        // Get the customer id
+        let customerID = $("#custId").val();
+
+        // initiate the request
+        $.ajax({
+            url: "http://localhost:8080/lk.pos.SystemJavaEE/customer ? custId=" + customerID,// viya query string
+            method: "DELETE",
+            //data:data,// application/x-www-form-urlencoded
+            success: function (res) {
+                console.log(res);
+                if (res.status == 200) {
+                    alert(res.message);
+                    loadAllCustomers();
+                } else if (res.status == 400) {
+                    alert(res.data);
+                } else {
+                    alert(res.data);
+                }
+
+            },
+            error: function (ob, status, t) {
+                console.log(ob);
+                console.log(status);
+                console.log(t);
+            }
+        });
+    });
+
+    //Update customer
+    $("#btnUpdate").click(function () {
+
+        //creating a js object with relevant data which you wanna send to the server
+        var cusOb = {
+            id: $("#custId").val(),
+            name: $("#custName").val(),
+            address: $("#custAddress").val(),
+            tp: $("#custTpNumber").val()
+        }
+
+        $.ajax({
+            url: "http://localhost:8080/lk.pos.SystemJavaEE/customer",
+            method: "PUT",
+            contentType: "application/json", //You should state request's content type using MIME types
+            data: JSON.stringify(cusOb), // format js object to valid json string
+            success: function (res) {
+                if (res.status == 200) { // process is  ok
+                    alert(res.message);
+                    loadAllCustomers();
+                } else if (res.status == 400) { // there is a problem with the client side
+                    alert(res.message);
+                } else {
+                    alert(res.data); // else maybe there is an exception
+                }
+            },
+            error: function (ob, errorStus) {
+                console.log(ob); // other errors
+            }
+        });
+    });
+
+
+    loadAllCustomers();
+
+    //Methods
+    function loadAllCustomers() {
+        $("#tblCustomerJson").empty();
+        $.ajax({
+            url: "http://localhost:8080/filter/customer?option=GETALL",
+            method: "GET",
+            // dataType:"json", // please convert the response into JSON
+            success: function (resp) {
+                for (const customer of resp.data) {
+                    let row = `<tr><td>${customer.id}</td><td>${customer.name}</td><td>${customer.address}</td><td>${customer.tp}</td></tr>`;
+                    $("#tblCustomerJson").append(row);
+                }
+                bindClickEvents();
+            },
+            error:function (ob,state){
+                console.log(ob,state)
+            }
+        });
+
+
+
+
+    }
+</script>
 </body>
 </html>

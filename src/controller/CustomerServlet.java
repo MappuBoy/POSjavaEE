@@ -61,7 +61,7 @@ public class CustomerServlet extends HttpServlet {
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         try {
-            if (customerDAO.delete(req.getParameter("custId"))){
+            if (customerDAO.delete(req.getParameter("id"))){
 
             } else {
 
