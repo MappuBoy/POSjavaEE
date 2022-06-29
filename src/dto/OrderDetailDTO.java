@@ -1,15 +1,15 @@
 package dto;
 
-public class OrderDetail {
+public class OrderDetailDTO {
     private String orderId;
     private String itemCode;
     private int orderQty;
     private double discount;
 
-    public OrderDetail() {
+    public OrderDetailDTO() {
     }
 
-    public OrderDetail(String orderId, String itemCode, int orderQty, double discount) {
+    public OrderDetailDTO(String orderId, String itemCode, int orderQty, double discount) {
         this.orderId = orderId;
         this.itemCode = itemCode;
         this.orderQty = orderQty;

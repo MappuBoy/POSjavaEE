@@ -1,15 +1,15 @@
 package dto;
 
-public class Item {
+public class ItemDTO {
     private String itemCode;
     private String discription;
     private int qtyInHand;
     private double unitPrice;
 
-    public Item() {
+    public ItemDTO(String floatingInputValueItemID, String floatingInputValueItemName) {
     }
 
-    public Item(String itemCode, String discription, int qtyInHand, double unitPrice) {
+    public ItemDTO(String itemCode, String discription, int qtyInHand, double unitPrice) {
         this.itemCode = itemCode;
         this.discription = discription;
         this.qtyInHand = qtyInHand;

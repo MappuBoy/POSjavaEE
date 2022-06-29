@@ -1,15 +1,15 @@
 package dto;
 
-public class Customer {
+public class CustomerDTO {
     private String custid;
     private String name;
     private String adderss;
     private String tp;
 
-    public Customer() {
+    public CustomerDTO() {
     }
 
-    public Customer(String custid, String name, String adderss, String tp) {
+    public CustomerDTO(String custid, String name, String adderss, String tp) {
         this.custid = custid;
         this.name = name;
         this.adderss = adderss;

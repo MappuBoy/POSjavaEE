@@ -1,14 +1,14 @@
 package dto;
 
-public class Order {
+public class OrderDTO {
     private String orderId;
     private String custid;
     private double price;
 
-    public Order() {
+    public OrderDTO() {
     }
 
-    public Order(String orderId, String custid, double price) {
+    public OrderDTO(String orderId, String custid, double price) {
         this.orderId = orderId;
         this.custid = custid;
         this.price = price;
